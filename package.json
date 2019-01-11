@@ -1,0 +1,25 @@
+{
+    "name": "leaves.search",
+    "version": "1.0.0",
+    "description": "Search Interface for Leaves",
+    "main": "index.html",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/appleseed/leaves.search.git"
+    },
+    "keywords": [
+      "search",
+      "leaves",
+      "appleseed"
+    ],
+    "author": "Rahul Singh",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/appleseed/leaves.lite/issues"
+    },
+    "homepage": "https://github.com/appleseed/leaves.lite#readme"
+  }
+  
