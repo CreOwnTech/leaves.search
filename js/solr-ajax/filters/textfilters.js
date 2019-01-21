@@ -56,9 +56,13 @@ module.filter('prettyFacetLabel', function () {
    * @return {String} Substitution text
    */
   return function (facet) {
-    if (facet == undefined) return facet;
+      if (facet == undefined) return facet;
+      debugger;
     // convert field name from camel case to sentence case
-    var result = facet.field.replace(/([A-Z])/g, " $1");
+      var result = facet.field.replace(/([A-Z])/g, " $1");
+     // result = facet.field.replace(/_/g, " ");
+      result = facet.field="Source";
+     
     var label = result.charAt(0).toUpperCase() + result.slice(1);
     // ISSUE #28 clean up the value text, remove all replacement characters
     var val = facet.value.split('(').join('');
@@ -73,9 +77,9 @@ module.filter('prettyFacetLabel', function () {
     val = val.replace('NOW', '');
     val = val.replace('NOW', '');
     val = val.replace('TO', '');
-
+      val = val.replace('-12-31T23:59:59Z', '');
     //val = val.replace('-01-01T00:00:00Z', '');
-    val = val.replace('-12-31T23:59:59Z', '');
+    
 
     val = val.replace('T23:59:59Z', '');
     val = val.replace('0:00:00Z', '');

@@ -109,11 +109,13 @@ function FacetClearSelectionController($scope, $rootScope, $attrs, $location, $r
   /**
    * Update the controller state.
    */
-  $scope.handleUpdate = function () {
+    $scope.handleUpdate = function () {
+        
     var hash = ($routeParams.query || "");
     var query = SolrSearchService.getQueryFromHash(hash, $rootScope.appleseedsSearchSolrProxy);
     if (query) {
-      $scope.items = query.getFacets();
+        $scope.items = query.getFacets();
+       
     }
   };
 

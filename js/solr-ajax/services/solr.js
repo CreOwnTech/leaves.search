@@ -505,7 +505,7 @@ m.provider('SolrSearchService', function solrSearchServiceProvider() {
     var defaultQuery = function(query) {
         query.setOption("fl", "*");
         query.setOption("json.wrf", "JSON_CALLBACK");
-        query.setOption("rows", 10);
+        query.setOption("rows", 20);
         query.setOption("wt", "json");
         query.setUserQuery("*:*");
         return query;
@@ -612,6 +612,7 @@ m.provider('SolrSearchService', function solrSearchServiceProvider() {
                         query.addQueryParameter(params[j]);
                     }
                 }
+                
                 // facets
                 else if (svc.startsWith(element, 'fq')) {
                     var p = eparts[1].indexOf(':');

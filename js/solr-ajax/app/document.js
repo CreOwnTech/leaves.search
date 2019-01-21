@@ -19,7 +19,8 @@ app.config(['$routeProvider', function($routeProvider) {
         when('/:query', { event: "/query" }).
         otherwise({ event: "/" });
     }])
-    .run(function($rootScope) {
+    .run(function ($rootScope) {
+        $rootScope.leafuri = "http://stage.leaves.anant.us/leaves/#!/leaf/";
         $rootScope.appleseedsSearchSolrProxy = "https://ss346483-us-east-1-aws.searchstax.com/solr/leaves_anant_stage";
         $rootScope.siteDomainPath = "http://localhost:8080";
         // the current webpage's hostname/ what is sent to solr as a filter query 
