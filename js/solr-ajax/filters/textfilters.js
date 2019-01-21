@@ -59,6 +59,7 @@ module.filter('prettyFacetLabel', function () {
     if (facet == undefined) return facet;
     // convert field name from camel case to sentence case
     var result = facet.field.replace(/([A-Z])/g, " $1");
+	result = facet.field="Source";
     var label = result.charAt(0).toUpperCase() + result.slice(1);
     // ISSUE #28 clean up the value text, remove all replacement characters
     var val = facet.value.split('(').join('');

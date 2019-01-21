@@ -1,6 +1,6 @@
 $(function () {
   $("#datepicker").datepicker();
-  $("#fromDate").datepicker({ dateFormat: 'yy-mm-dd' });
-  $("#endDate").datepicker({ dateFormat: 'yy-mm-dd' });
+    $("#fromDate").datepicker({ dateFormat: 'mm-dd-yy' });
+    $("#endDate").datepicker({ dateFormat: 'mm-dd-yy' });
 });
 
