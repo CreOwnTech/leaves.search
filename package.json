@@ -21,10 +21,9 @@
       "url": "https://github.com/appleseed/leaves.lite/issues"
     },
     "homepage": "https://github.com/appleseed/leaves.lite#readme",
-	
 	  "leafeuri": {
-    "description": "leaves reader",
-    "url": "http://dev.leaves.anant.us/leaves/#!/leaf/"
-  }
+       "description": "leaves reader",
+      "url": "http://dev.leaves.anant.us/leaves/#!/leaf/"
+    }
   }
   
