@@ -493,13 +493,13 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
 
 
     $scope.leafurl = function (uri, id) {
-        $.ajax({
+     $.ajax({
             type: "GET",
-            url: "config.xml",
-            dataType: "xml",
-            success: function (xml) {
-                console.log(xml);
-                var url = $(xml).find('conleaf').text();
+            url: "package.json",
+            dataType: "json",
+            success: function (json) {
+
+                var url = json.leafeuri.url;
                 if (url != "") {
                     window.open(url + id, '_blank');
                 }
