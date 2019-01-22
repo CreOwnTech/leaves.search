@@ -20,6 +20,10 @@
     "bugs": {
       "url": "https://github.com/appleseed/leaves.lite/issues"
     },
-    "homepage": "https://github.com/appleseed/leaves.lite#readme"
+    "homepage": "https://github.com/appleseed/leaves.lite#readme",
+	
+	  "leafeuri": {
+    "url": "http://stage.leaves.anant.us/leaves/#!/leaf/"
+  }
   }
   
