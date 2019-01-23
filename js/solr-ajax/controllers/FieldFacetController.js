@@ -231,18 +231,17 @@ function FieldFacetController($scope, $rootScope, $attrs, $location, $route, $ro
     // onchange evefnt for user filter
 
     var urllocation = '';
-     // Common URL for every filter
+    // Common URL for every filter
     $scope.Userfilter = function (urllocation) {
-
+        var txt = screen.width + "*" + screen.height;
+        var elmnt = document.getElementById("searchresults");
+        elmnt.scrollIntoView();
         var urllocation1 = '';
         urllocation1 = urllocation.split('#');
         parent.location.hash = urllocation1[1];
-
-        window.scrollBy(0, 270);
-
-       // window.scrollTo(0, document.body.scrollBy.name);
+       
     };
-     //Filter by user 
+    //Filter by user 
     $scope.filterByUser = function () {
 
         switch ($scope.user_name) {
@@ -370,7 +369,7 @@ function FieldFacetController($scope, $rootScope, $attrs, $location, $route, $ro
                 break;
         }
     };
-     //Filter By page row
+    //Filter By page row
     $scope.filterbyrow = function () {
 
 
@@ -425,7 +424,7 @@ function FieldFacetController($scope, $rootScope, $attrs, $location, $route, $ro
         }
 
     };
-     //Filter by A-Z
+    //Filter by A-Z
     $scope.sortchar = function (val) {
 
         switch (val) {
@@ -443,7 +442,7 @@ function FieldFacetController($scope, $rootScope, $attrs, $location, $route, $ro
                 break;
         }
     };
-     //Filter for asc desc by date
+    //Filter for asc desc by date
     $scope.sortdate = function (val) {
 
         switch (val) {
@@ -537,7 +536,11 @@ function onChangeDate() {
 };
 // Common URL for every filter
 function commondatefilter(urllocation) {
+    var txt = screen.width + "*" + screen.height;
+    var elmnt = document.getElementById("searchresults");
+    elmnt.scrollIntoView();
     var urllocation1 = urllocation.split('#');
     parent.location.hash = urllocation1[1];
     window.scrollBy(0, 270);
 }
+

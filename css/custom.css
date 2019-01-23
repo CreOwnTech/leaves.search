@@ -245,6 +245,7 @@ body {
 
     .mobileview {
         display: block;
+        overflow: hidden;
     }
 
     .leptopview {
@@ -264,6 +265,7 @@ body {
 
     .mobileview {
         display: block;
+        overflow: hidden;
     }
 
     .leptopview {
@@ -281,6 +283,7 @@ body {
 @media only screen and (min-device-width : 375px) and (max-device-width : 667px) and (orientation : landscape) { /* STYLES GO HERE */
     .mobileview {
         display: block;
+        overflow: hidden;
     }
 
     .leptopview {
@@ -294,5 +297,5 @@ body {
     .pagingover {
         overflow: scroll;
     }
-
+   
 }
