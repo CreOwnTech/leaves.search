@@ -258,6 +258,7 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
      * Initialize the controller.
      */
     $scope.init = function () {
+        $scope.leafurl();
         // apply configured attributes
         for (var key in $attrs) {
             if ($scope.hasOwnProperty(key)) {
@@ -455,6 +456,7 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
         if ($scope.totalSets > 1 && currentSet != 0) {
             var previousSet = firstPageInSet - $scope.pagesPerSet - 1;
             var prevPage = new Page("«", previousSet);
+
             $scope.pages.push(prevPage);
         }
         // page links
@@ -491,21 +493,18 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
         $scope.isVisible[item] = !$scope.isVisible[item];
     };
 
-
-    $scope.leafurl = function (uri, id) {
-     $.ajax({
+    //Get leaves reader URL
+    $scope.leafurl = function () {
+        debugger;
+        $.ajax({
             type: "GET",
-            url: "package.json",
+            url: "config.json",
             dataType: "json",
             success: function (json) {
 
-                var url = json.leafeuri.url;
-                if (url != "") {
-                    window.open(url + id, '_blank');
-                }
-                else {
-                    window.open(uri + id, '_blank');
-                }
+                $scope.url = json.reader.url;
+                $scope.uri = json.stageleaves.url;
+              
             }
         });
     };

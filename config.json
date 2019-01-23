@@ -1,0 +1,24 @@
+{
+
+  "api": {
+    "description": "leaves.api",
+    "url": "http://dev.leaves.anant.us/api/"
+  },
+  "search": {
+    "description": "leaves.solr",
+    "url": "http://dev.leaves.anant.us/solr/"
+  },
+  "reader": {
+    "description": "leaves.api",
+    "url": "http://dev.leaves.anant.us/leaves/#!/leaf/"
+  },
+  "domain": {
+    "root": "http://dev.leaves.anant.us/",
+    "alias": "localhost"
+  },
+  "stageleaves": {
+    "description": "leaves.api",
+    "url": "http://stage.leaves.anant.us/leaves/#!/leaf/"
+  }
+
+}

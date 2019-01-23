@@ -57,11 +57,14 @@ module.filter('prettyFacetLabel', function () {
    */
   return function (facet) {
       if (facet == undefined) return facet;
-      debugger;
+    
     // convert field name from camel case to sentence case
       var result = facet.field.replace(/([A-Z])/g, " $1");
      // result = facet.field.replace(/_/g, " ");
-      result = facet.field="Source";
+      //result = facet.field="Source";
+      if (facet.field == "user_name") { result = facet.field = "User name" }
+      if (facet.field == "domain_name") { result = facet.field = "Source" }
+      if (facet.field == "created_at") { result = facet.field = "Created at" }
      
     var label = result.charAt(0).toUpperCase() + result.slice(1);
     // ISSUE #28 clean up the value text, remove all replacement characters

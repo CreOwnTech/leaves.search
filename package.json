@@ -22,9 +22,5 @@
     },
     "homepage": "https://github.com/appleseed/leaves.lite#readme",
 	
-	  "leafeuri": {
-    "description": "leaves reader",
-    "url": "http://dev.leaves.anant.us/leaves/#!/leaf/"
-  }
   }
   

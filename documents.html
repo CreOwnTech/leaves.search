@@ -9,6 +9,8 @@
     <meta name="author" content="Anant Corporation">
     <meta name="description" content="AJAX web interface to Appleseed Search">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/favicon.ico" class="js-favicon">
+
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -32,10 +34,8 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/custom.css" rel="stylesheet" />
 
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">-->
     <!--<link href="css/bootstrap/bootstrap.css" type="text/css" rel="stylesheet" />-->
     <!--<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css" />-->
     <!--<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-responsive.min.css" />-->
@@ -65,7 +65,7 @@
     <script type="text/javascript" src="js/chosen/chosen.jquery.js"></script>
     <script type="text/javascript" src="js/chosen/angular-chosen.js"></script>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- scripts - date picker -->
@@ -83,15 +83,15 @@
             $("#accordion").accordion();
         });
     </script>
-  <style>
-      a {
-          cursor: pointer;
-        
-      }
-          a :hover {
-              text-decoration: underline;
-          }
-  </style>
+    <style>
+        a {
+            cursor: pointer;
+        }
+
+            a :hover {
+                text-decoration: underline;
+            }
+    </style>
 </head>
 <body>
 
@@ -114,7 +114,7 @@
             </form>
         </div>
     </nav>
-     
+
 
     <div class="container-fluid">
         <div class="row">
@@ -134,7 +134,7 @@
 
                                                 <li>
                                                     <ul class="items unstyled">
-                                                        
+
                                                         <li class="facet" ng-repeat="item in items">
                                                             <i ng-model="$scope.item1"></i>
 
@@ -284,7 +284,7 @@
 
 
 
-            <div class="col-lg-9">
+            <div class="col-lg-9" id="searchresults">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
@@ -393,7 +393,7 @@
                                         <h5 class="summary"><span count-to="{{totalResults}}" duration="1" count-from="1"></span> Results</h5>
                                         <div class="summary" ng-show="documents.length > 0" ng-controller="SearchHistoryController" ng-cloak>
                                             <div class="results-bar">
-                                                <span>Search Results </span>
+                                                <span>Search Results</span>
                                                 <span class="bold" ng-repeat="page in pagesOnly" ng-show="page.isCurrent">{{(page.name * documentsPerPage)-(documentsPerPage-1)}}</span>
                                                 <span class="bold">-</span>
                                                 <span class="bold" ng-repeat="page in pagesOnly" ng-show="page.isCurrent"> {{(page.name *documentsPerPage)<(totalResults)?(page.name * documentsPerPage):(totalResults)}} </span>
@@ -411,12 +411,13 @@
                             </div>
                             <div class="row">
 
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 pagingover">
+
                                     <div id="search-results"
                                          ng-controller="DocumentSearchResultsController"
                                          data-fields="*"
                                          data-source="{{appleseedsSearchSolrProxy}}"
-                                         documents-per-page="25"
+                                         documents-per-page="10"
                                          ng-cloak>
                                         <div class="summary" ng-show="documents.length > 0" ng-controller="SearchHistoryController" ng-cloak>
                                             <div class="alert alert-error" ng-show="error">{{error}}</div>
@@ -494,7 +495,7 @@
 
                                     <div class="loading" ng-show="loading" ng-cloak>
                                         <img src="img/giphy.gif" alt="Loading search results" class="loderimg leptopview" />
-                                        <img src="img/giphy.gif" alt="Loading search results" class="loderimg1 mobileview"/>
+                                        <img src="img/giphy.gif" alt="Loading search results" class="loderimg1 mobileview" />
                                     </div>
 
                                 </div>
@@ -514,7 +515,7 @@
                                                     <div class="card-header iPad">
                                                         <div class="card border-secondary">
                                                             <div class="">
-                                                                <a ng-href="{{doc.name}}" class="thumbnail">
+                                                                <a ng-href="{{url}}{{doc.id}}"  class="thumbnail" target="_blank">
                                                                     <img src="img/noimagefound.png" alt="{{doc.title[0]}}" />
                                                                 </a>
                                                             </div>
@@ -532,14 +533,16 @@
                                                         <div class="meta inline">
                                                             <span class="region doc-type" ng-show="doc.type">{{doc.type}}</span>
                                                             <div class="existdates">
-                                                                <a ng-click="leafurl(leafuri,doc.id)" class="title" target="_blank"><span>{{doc.title}}</span> </a><br />
+                                                                <span>{{url}}</span>
+                                                                <a ng-href="{{url}}{{doc.id}}"  class="title" target="_blank"><span>{{doc.title}}</span> </a><br />
                                                                 <span class="dominname">{{doc.domain_name}}</span><br />
 
                                                                 <span><i class="fa fa-user iconpading iconNoPading"></i>{{doc.user_name}}</span>
                                                                 <span ng-show="doc.toDate"></span>
-                                                                <span class=""><i class="fas fa-clock iconpading" aria-hidden="true"></i>&nbsp; <span ng-bind="Date"></span></span>
+                                                                <span class=""><i class="fa fa-clock-o iconpading" aria-hidden="true"></i><span ng-bind="Date"></span></span>
 
-                                                                <a ng-href="{{doc.url}}" target="_blank" class="title"><span><i class="fa fa-link iconpading" aria-hidden="true"></i>Link</span></a>
+                                                                <a ng-href="{{doc.url}}" target="_blank" class="title"><span><i class="fa fa-external-link iconpading" aria-hidden="true"></i>Link</span></a>
+                                                                <a ng-href="{{url}}{{doc.id}}"  target="_blank" class="title"><span><i class="fa fa-file-text-o iconpading" aria-hidden="true"></i>Read</span></a>
 
                                                             </div>
 
@@ -548,21 +551,11 @@
                                                     </div>
                                                 </div>
 
-
-
-
-
-
-
-
-
-
-
                                                 <div class="thumb" ng-show="doc.preview_picture[0]">
                                                     <div class="card-header iPad">
                                                         <div class="card border-secondary">
                                                             <div class="">
-                                                                <a ng-href="{{doc.name}}" class="thumbnail">
+                                                                <a ng-href="{{url}}{{doc.id}}" class="thumbnail" target="_blank">
                                                                     <img ng-src="{{doc.preview_picture}}" alt="{{doc.title[0]}}" />
                                                                 </a>
                                                             </div>
@@ -581,12 +574,16 @@
                                                         <div class="meta inline">
                                                             <span class="region doc-type" ng-show="doc.type">{{doc.type}}</span>
                                                             <div class="existdates">
-                                                                <a ng-click="leafurl(leafuri,doc.id)" class="title" target="_blank"><span>{{doc.title}}</span></a><br />
+                                                                <a ng-href="{{url}}{{doc.id}}" class="title" target="_blank"><span>{{doc.title}}</span> </a><br />
                                                                 <span class="dominname">{{doc.domain_name}}</span><br />
+
                                                                 <span><i class="fa fa-user iconpading iconNoPading"></i>{{doc.user_name}}</span>
                                                                 <span ng-show="doc.toDate"></span>
-                                                                <span class=""><i class="fas fa-clock iconpading" aria-hidden="true"></i><span ng-bind="Date"></span></span>
-                                                                <a ng-href="{{doc.url}}" target="_blank" class="title"><span><i class="fa fa-link iconpading" aria-hidden="true"></i>Link</span></a>
+                                                                <span class=""><i class="fa fa-clock-o iconpading" aria-hidden="true"></i><span ng-bind="Date"></span></span>
+
+                                                                <a ng-href="{{doc.url}}" target="_blank" class="title"><span><i class="fa fa-external-link iconpading" aria-hidden="true"></i>Link</span></a>
+                                                                <a ng-href="{{url}}{{doc.id}}" target="_blank" class="title"><span><i class="fa fa-file-text-o iconpading" aria-hidden="true"></i>Read</span></a>
+
                                                             </div>
 
                                                         </div>
@@ -618,7 +615,7 @@
                                                 g more search results ...
                                             </p>
                                             <img src="img/ajax-loader-bar.gif" alt="Loading more search results" />
-                                         
+
                                         </div>
 
                                     </div>
@@ -656,7 +653,7 @@
 
 
 
-                        <div class="pagination" ng-hide="error || userquery &&!loading && documents.length == 0" ng-cloak>
+                        <div class="pagination pagingover" ng-hide="error || userquery &&!loading && documents.length == 0" ng-cloak>
                             <ul class="pagination" ng-show="totalResults > documentsPerPage">
                                 <li class="page-item" ng-repeat="page in pages">
                                     <a class="page-link" ng-class="{iscurrent:page.isCurrent}" ng-click="$parent.handleSetPage(page.number)">{{page.name}}</a>
