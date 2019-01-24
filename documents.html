@@ -5,6 +5,7 @@
     <!-- meta -->
     <meta charset="utf-8">
     <title>Appleseed Search : Search.Web.User : Documents</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
     <meta name="viewport" content="width=device-width, user-scalable=no" />
     <meta name="author" content="Anant Corporation">
     <meta name="description" content="AJAX web interface to Appleseed Search">
@@ -284,7 +285,7 @@
 
 
 
-            <div class="col-lg-9">
+            <div class="col-lg-9" id="iphonewidth">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
@@ -515,7 +516,7 @@
                                                     <div class="card-header iPad">
                                                         <div class="card border-secondary">
                                                             <div class="">
-                                                                <a ng-href="{{url}}{{doc.id}}"  class="thumbnail" target="_blank">
+                                                                <a ng-href="{{url}}{{doc.id}}" class="thumbnail" target="_blank">
                                                                     <img src="img/noimagefound.png" alt="{{doc.title[0]}}" />
                                                                 </a>
                                                             </div>
@@ -533,8 +534,7 @@
                                                         <div class="meta inline">
                                                             <span class="region doc-type" ng-show="doc.type">{{doc.type}}</span>
                                                             <div class="existdates">
-                                                                <span>{{url}}</span>
-                                                                <a ng-href="{{url}}{{doc.id}}"  class="title" target="_blank"><span>{{doc.title}}</span> </a><br />
+                                                                <a ng-href="{{url}}{{doc.id}}" class="title" target="_blank"><span>{{doc.title}}</span> </a><br />
                                                                 <span class="dominname">{{doc.domain_name}}</span><br />
 
                                                                 <span><i class="fa fa-user iconpading iconNoPading"></i>{{doc.user_name}}</span>
@@ -542,7 +542,7 @@
                                                                 <span class=""><i class="fa fa-clock-o iconpading" aria-hidden="true"></i><span ng-bind="Date"></span></span>
 
                                                                 <a ng-href="{{doc.url}}" target="_blank" class="title"><span><i class="fa fa-external-link iconpading" aria-hidden="true"></i>Link</span></a>
-                                                                <a ng-href="{{url}}{{doc.id}}"  target="_blank" class="title"><span><i class="fa fa-file-text-o iconpading" aria-hidden="true"></i>Read</span></a>
+                                                                <a ng-href="{{url}}{{doc.id}}" target="_blank" class="title"><span><i class="fa fa-file-text-o iconpading" aria-hidden="true"></i>Read</span></a>
 
                                                             </div>
 

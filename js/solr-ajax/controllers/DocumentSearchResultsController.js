@@ -474,6 +474,11 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
             var nextPage = new Page("»", nextSet);
             $scope.pages.push(nextPage);
         }
+
+        //page start from result section 
+        var txt = screen.width + "*" + screen.height;
+        var elmnt = document.getElementById("searchresults");
+        elmnt.scrollIntoView();
     };
 
     $scope.setSortOption = function (query) {
