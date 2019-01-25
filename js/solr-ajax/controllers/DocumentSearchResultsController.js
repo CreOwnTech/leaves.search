@@ -475,10 +475,12 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
             $scope.pages.push(nextPage);
         }
 
-        //page start from result section 
+        //page start from result section for mobile view 
         var txt = screen.width + "*" + screen.height;
-        var elmnt = document.getElementById("searchresults");
-        elmnt.scrollIntoView();
+        if (txt == "320*568" || txt == "375*667" || txt == "414*736" || txt == "375*812" || txt == "768*1024" || txt == "411*823" || txt == "411*731" || txt == "360*640") {
+            var elmnt = document.getElementById("searchresults");
+            elmnt.scrollIntoView();
+        } 
     };
 
     $scope.setSortOption = function (query) {
@@ -500,7 +502,6 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
 
     //Get leaves reader URL
     $scope.leafurl = function () {
-        debugger;
         $.ajax({
             type: "GET",
             url: "config.json",

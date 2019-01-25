@@ -230,16 +230,26 @@ function FieldFacetController($scope, $rootScope, $attrs, $location, $route, $ro
 
     // onchange evefnt for user filter
 
+
+    // screen scroller for mobile view 
+
+    $scope.screenscrol = function () {
+        var elmnt = document.getElementById("searchresults");
+        elmnt.scrollIntoView();
+    }
+
     var urllocation = '';
     // Common URL for every filter
     $scope.Userfilter = function (urllocation) {
+
         var txt = screen.width + "*" + screen.height;
-        var elmnt = document.getElementById("searchresults");
-        elmnt.scrollIntoView();
+        if (txt == "320*568" || txt == "375*667" || txt == "414*736" || txt == "375*812" || txt == "768*1024" || txt == "411*823" || txt == "411*731" || txt == "360*640") {
+            $scope.screenscrol();
+        }
         var urllocation1 = '';
         urllocation1 = urllocation.split('#');
         parent.location.hash = urllocation1[1];
-       
+
     };
     //Filter by user 
     $scope.filterByUser = function () {
@@ -536,11 +546,15 @@ function onChangeDate() {
 };
 // Common URL for every filter
 function commondatefilter(urllocation) {
+
     var txt = screen.width + "*" + screen.height;
-    var elmnt = document.getElementById("searchresults");
-    elmnt.scrollIntoView();
+    if (txt == "320*568" || txt == "375*667" || txt == "414*736" || txt == "375*812" || txt == "768*1024" || txt == "411*823" || txt == "411*731" || txt == "360*640") {
+        var elmnt = document.getElementById("searchresults");
+        elmnt.scrollIntoView();
+    }
+
     var urllocation1 = urllocation.split('#');
     parent.location.hash = urllocation1[1];
-    window.scrollBy(0, 270);
+
 }
 

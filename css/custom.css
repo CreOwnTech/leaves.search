@@ -212,6 +212,9 @@ body {
     input, input:active, input:focus, input:focus-within, input:hover, input:visited {
         font-size: 16px !important;
     }
+    select, select:active, select:focus, select:focus-within, select:hover, select:visited {
+        font-size: 16px !important;
+    }
 }
 
 
@@ -237,6 +240,9 @@ body {
     }
 
     input, input:active, input:focus, input:focus-within, input:hover, input:visited {
+        font-size: 16px !important;
+    }
+    select, select:active, select:focus, select:focus-within, select:hover, select:visited {
         font-size: 16px !important;
     }
 }
@@ -265,6 +271,9 @@ body {
     input, input:active, input:focus, input:focus-within, input:hover, input:visited {
         font-size: 16px !important;
     }
+    select, select:active, select:focus, select:focus-within, select:hover, select:visited {
+        font-size: 16px !important;
+    }
 }
 
 @media screen and (min-device-width : 375px) and (max-device-width : 667px) {
@@ -290,6 +299,9 @@ body {
     input, input:active, input:focus, input:focus-within, input:hover, input:visited {
         font-size: 16px !important;
     }
+    select, select:active, select:focus, select:focus-within, select:hover, select:visited {
+        font-size: 16px !important;
+    }
 }
 
 @media only screen and (min-device-width : 375px) and (max-device-width : 667px) and (orientation : landscape) { /* STYLES GO HERE */
@@ -313,6 +325,9 @@ body {
     }
 
     input, input:active, input:focus, input:focus-within, input:hover, input:visited {
+        font-size: 16px !important;
+    }
+    select, select:active, select:focus, select:focus-within, select:hover, select:visited {
         font-size: 16px !important;
     }
 }
