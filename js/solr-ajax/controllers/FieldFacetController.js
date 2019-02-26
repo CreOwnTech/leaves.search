@@ -557,4 +557,15 @@ function commondatefilter(urllocation) {
     parent.location.hash = urllocation1[1];
 
 }
+setTimeout(function () {
+    
+    var hashlocation = parent.location.hash;
+    var getparam = hashlocation.split('/');
+    var getparamval = getparam[1].split('&');
+    var checkprmval = getparamval[0].split('=');
+    if (checkprmval[1] != "*:*") {
+        $("#userquery").val(checkprmval[1]);
+    }
+}, 1000);
+
 
