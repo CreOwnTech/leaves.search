@@ -546,7 +546,7 @@ function onChangeDate() {
 };
 // Common URL for every filter
 function commondatefilter(urllocation) {
-
+    debugger;
     var txt = screen.width + "*" + screen.height;
     if (txt == "320*568" || txt == "375*667" || txt == "414*736" || txt == "375*812" || txt == "768*1024" || txt == "411*823" || txt == "411*731" || txt == "360*640") {
         var elmnt = document.getElementById("searchresults");
@@ -557,4 +557,17 @@ function commondatefilter(urllocation) {
     parent.location.hash = urllocation1[1];
 
 }
+$("#userquery").val('');
+
+setTimeout(function () {
+    
+    var hashlocation = parent.location.hash;
+    var getparam = hashlocation.split('/');
+    var getparamval = getparam[1].split('&');
+    var checkprmval = getparamval[0].split('=');
+    if (checkprmval[1] != "*:*") {
+        $("#userquery").val(checkprmval[1]);
+    }
+}, 1000);
+
 
