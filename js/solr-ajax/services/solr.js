@@ -243,6 +243,11 @@ function SolrQuery(Url) {
      * @returns {String} Location query
      */
     self.getQuery = function(ForSolr) {
+		// q value bind in search box
+        if (self.query != "*:*") {
+            $("#userquery").val(self.query);
+        }
+
         // query
         var query = "q=" + self.query;
         
