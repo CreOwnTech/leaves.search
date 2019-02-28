@@ -404,36 +404,7 @@ function FieldFacetController($scope, $rootScope, $attrs, $location, $route, $ro
         }
 
     };
-    //Filter by match any or match all word
-    $scope.filterByword = function () {
-
-        var word = '';
-        word = document.getElementById('userquery').value;
-        if (document.getElementById('Any_Words').checked) {
-            if (word != "") {
-                urllocation = window.location.href + "&q=" + word + "&fq=title:&start=0";
-                $scope.Userfilter(urllocation);
-
-            }
-            else {
-                urllocation = window.location.href + "&q=*:*&rows=20&";
-                $scope.Userfilter(urllocation);
-
-            }
-        }
-        if (document.getElementById('All_Words').checked) {
-            if (word != "") {
-                urllocation = window.location.href + "&q=*:*&fq=title:" + '"' + word + '"' + "&start=0";
-                $scope.Userfilter(urllocation);
-
-            }
-            else {
-                urllocation = window.location.href + "&q=*:*&fq=title:&rows=20&";
-                $scope.Userfilter(urllocation);
-            }
-        }
-
-    };
+ 
     //Filter by A-Z
     $scope.sortchar = function (val) {
 

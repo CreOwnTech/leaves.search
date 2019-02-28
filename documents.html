@@ -292,9 +292,11 @@
                             <section id="content">
                                 <div class="container-fluid">
                                     <div class="row-fluid">
-                                        <form ng-controller="FieldFacetController" ng-submit="filterByword()" data-near-match="true" data-search-hints-field="" data-source="{{appleseedsSearchSolrProxy}}">
-                                            <input name="q" class="form-control searchbox" type="text" placeholder="Keyword or placename" ng-model="userquery" id="userquery" searchbox />
+                                        <form ng-controller="DocumentSearchResultsController" ng-submit="filterByword()" data-near-match="true" data-search-hints-field="" data-source="{{appleseedsSearchSolrProxy}}">
+                                           
+                                            <input name="q" class="form-control searchbox" type="text" placeholder="Keyword or placename" ng-model="userquery" id="userquery" searchbox"/>
                                             <i class="fa fa-search searchbutton" ng-click="filterByword()" searchbutton aria-hidden="true"></i>
+                                        
                                         </form>
                                     </div>
                                 </div>

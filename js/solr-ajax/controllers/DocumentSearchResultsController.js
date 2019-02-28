@@ -20,7 +20,6 @@
  * @param Utils
  */
 function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, $route, $routeParams, $window, SolrSearchService, Utils) {
-
     $scope.Date;
     // document search results
     $scope.documents = [];
@@ -101,6 +100,8 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
 
     // measured search analytics key
     $scope.measuredSearchKey = '';
+
+    
 
     ///////////////////////////////////////////////////////////////////////////
 
@@ -328,12 +329,13 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
      * Alternatively also used to start the initial search. 
      */
     $scope.initialSearch = function (sortOrder) {
-
+       
         // console.log("in initial alpha search");
-
+        
         // clean up the user query
         var trimmed = Utils.trim($scope.userquery);
         if (trimmed === '') {
+           
             $scope.userquery = "*:*";
         }
         // build the query string
@@ -379,6 +381,7 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
         }
 
     }
+    
 
     /**
     * Sets the search sorting to score or relevance
@@ -388,8 +391,10 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
         // clean up the user query
         var trimmed = Utils.trim($scope.userquery);
         if (trimmed === '') {
+
             $scope.userquery = "*:*";
         }
+       
         // build the query string
         var query = SolrSearchService.getQuery($scope.queryName);
         if (query == undefined) {
@@ -429,6 +434,9 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
                 break;
         }
     }
+
+
+
 
     /**
      * Update page index for navigation of search results. Pages are presented
@@ -480,7 +488,7 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
         if (txt == "320*568" || txt == "375*667" || txt == "414*736" || txt == "375*812" || txt == "768*1024" || txt == "411*823" || txt == "411*731" || txt == "360*640") {
             var elmnt = document.getElementById("searchresults");
             elmnt.scrollIntoView();
-        } 
+        }
     };
 
     $scope.setSortOption = function (query) {
@@ -510,10 +518,55 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
 
                 $scope.url = json.reader.url;
                 $scope.uri = json.stageleaves.url;
-              
+
             }
         });
     };
+
+
+  
+
+    // Common URL for filterByword function
+    $scope.Userfilter = function (urllocation) {
+
+        $scope.responsive();
+        $scope.urllocation = '';
+        $scope.urllocation = urllocation.split('#');
+        parent.location.hash = $scope.urllocation[1];
+
+    };
+
+    //Filter by match any or match all word
+    $scope.filterByword = function () {
+        $scope.urllocation = '';
+        $scope.word = '';
+        $scope.word = document.getElementById('userquery').value;
+        if (document.getElementById('Any_Words').checked) {
+            if ($scope.word != "") {
+                $scope.urllocation = window.location.href + "&q=" + $scope.word + "&fq=title:&start=0";
+                $scope.Userfilter($scope.urllocation);
+
+            }
+            else {
+                $scope.urllocation = window.location.href + "&q=*:*&rows=20&";
+                $scope.Userfilter($scope.urllocation);
+
+            }
+        }
+        if (document.getElementById('All_Words').checked) {
+            if ($scope.word != "") {
+                $scope.urllocation = window.location.href + "&q=*:*&fq=title:" + '"' + $scope.word + '"' + "&start=0";
+                $scope.Userfilter($scope.urllocation);
+
+            }
+            else {
+                $scope.urllocation = window.location.href + "&q=*:*&fq=title:&rows=20&";
+                $scope.Userfilter($scope.urllocation);
+            }
+        }
+
+    };
+
 
     // initialize the controller
     $scope.init();
