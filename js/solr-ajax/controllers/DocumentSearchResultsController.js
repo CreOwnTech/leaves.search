@@ -529,7 +529,6 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
     // Common URL for filterByword function
     $scope.Userfilter = function (urllocation) {
 
-        $scope.responsive();
         $scope.urllocation = '';
         $scope.urllocation = urllocation.split('#');
         parent.location.hash = $scope.urllocation[1];
@@ -538,6 +537,7 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
 
     //Filter by match any or match all word
     $scope.filterByword = function () {
+        
         $scope.urllocation = '';
         $scope.word = '';
         $scope.word = document.getElementById('userquery').value;
@@ -557,16 +557,235 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
             if ($scope.word != "") {
                 $scope.urllocation = window.location.href + "&q=*:*&fq=title:" + '"' + $scope.word + '"' + "&start=0";
                 $scope.Userfilter($scope.urllocation);
+                
 
             }
             else {
                 $scope.urllocation = window.location.href + "&q=*:*&fq=title:&rows=20&";
                 $scope.Userfilter($scope.urllocation);
+              
+               
             }
         }
 
     };
 
+
+
+
+
+    // screen scroller for mobile view 
+
+    $scope.screenscrol = function () {
+        var elmnt = document.getElementById("searchresults");
+        elmnt.scrollIntoView();
+    }
+
+    var urllocation = '';
+    // Common URL for every filter
+    $scope.Userfilter = function (urllocation) {
+
+        var txt = screen.width + "*" + screen.height;
+        if (txt == "320*568" || txt == "375*667" || txt == "414*736" || txt == "375*812" || txt == "768*1024" || txt == "411*823" || txt == "411*731" || txt == "360*640") {
+            $scope.screenscrol();
+        }
+        var urllocation1 = '';
+        urllocation1 = urllocation.split('#');
+        parent.location.hash = urllocation1[1];
+
+    };
+    //Filter by user 
+    $scope.filterByUser = function () {
+
+        switch ($scope.user_name) {
+            case "0":
+                urllocation = window.location.href + "&fq=user_name:(admin)&start=0";
+                $scope.Userfilter(urllocation);
+                break;
+            case "1":
+                urllocation = window.location.href + "&fq=user_name:(jsbilgi)&start=0";
+                $scope.Userfilter(urllocation);
+                break;
+            case "":
+                urllocation = window.location.href + "&fq=user_name:&start=0";
+                $scope.Userfilter(urllocation);
+                break;
+        }
+    };
+
+    //Filter by day 
+    $scope.filterByDay = function () {
+
+        var fromdate = '';
+        var todate = '';
+        var currentdate = new Date();
+
+        switch ($scope.days) {
+
+            case "0":
+                fromdate = currentdate.getFullYear() + "-" + (currentdate.getMonth() + 1) + "-" + currentdate.getDate();
+                todate = currentdate.getFullYear() + "-" + (currentdate.getMonth() + 1) + "-" + currentdate.getDate();
+
+                urllocation = window.location.href + "&fq=created_at:[" + fromdate + 'T00:00:00Z' + ' TO ' + todate + 'T23:59:59Z' + "]&start=0";
+                $scope.Userfilter(urllocation);
+                break;
+
+
+            case "1":
+                fromdate = currentdate.getFullYear() + "-" + (currentdate.getMonth() + 1) + "-" + (currentdate.getDate() - 1);
+                todate = currentdate.getFullYear() + "-" + (currentdate.getMonth() + 1) + "-" + (currentdate.getDate() - 1);
+
+                urllocation = window.location.href + "&fq=created_at:[" + fromdate + 'T00:00:00Z' + ' TO ' + todate + 'T23:59:59Z' + "]&start=0";
+                $scope.Userfilter(urllocation);
+                break;
+
+
+
+            case "2":
+
+                var startDay = 1; //0=sunday, 1=monday etc.
+                var d = currentdate.getDay(); //get the current day
+                var weekStart = new Date(currentdate.valueOf() - (d <= 0 ? 7 - startDay : d - startDay) * 86400000); //rewind to start day
+                var weekEnd = new Date(weekStart.valueOf() + 6 * 86400000); //add 6 days to get last day
+
+                var WS = weekStart;
+                var fromdate = WS.getFullYear() + '-' + (WS.getMonth() + 1) + '-' + WS.getDate();
+                var WE = weekEnd;
+                var todate = WE.getFullYear() + '-' + (WE.getMonth() + 1) + '-' + WE.getDate();
+
+                urllocation = window.location.href + "&fq=created_at:[" + fromdate + 'T00:00:00Z' + ' TO ' + todate + 'T00:00:00Z' + "]&start=0";
+                $scope.Userfilter(urllocation);
+                break;
+
+            case "3":
+
+                var firstDay = new Date(currentdate.getFullYear(), currentdate.getMonth(), 1);
+                var lastDay = new Date(currentdate.getFullYear(), currentdate.getMonth() + 1, 0);
+
+                var fromdate = firstDay.getFullYear() + "-" + (firstDay.getMonth() + 1) + "-" + firstDay.getDate();
+                var todate = lastDay.getFullYear() + "-" + (lastDay.getMonth() + 1) + "-" + lastDay.getDate();
+
+                urllocation = window.location.href + "&fq=created_at:[" + fromdate + 'T00:00:00Z' + ' TO ' + todate + 'T00:00:00Z' + "]&start=0";
+                $scope.Userfilter(urllocation);
+
+                break;
+
+
+            case "4":
+
+                var firstDay = new Date(currentdate.getFullYear(), currentdate.getMonth(), 1);
+                var myVariable = firstDay;
+                var makeDate = new Date(myVariable);
+                makeDate.setMonth(makeDate.getMonth() - 1);
+                var fromdate = makeDate.getFullYear() + "-" + (makeDate.getMonth() + 1) + "-" + makeDate.getDate();
+                var lastDay = new Date(makeDate.getFullYear(), makeDate.getMonth() + 1, 0);
+                var todate = lastDay.getFullYear() + "-" + (lastDay.getMonth() + 1) + "-" + lastDay.getDate();
+
+
+                urllocation = window.location.href + "&fq=created_at:[" + fromdate + 'T00:00:00Z' + ' TO ' + todate + 'T00:00:00Z' + "]&start=0";
+                $scope.Userfilter(urllocation);
+                break;
+
+            case "5":
+
+                var datetime = currentdate.getFullYear() + "-" + (currentdate.getMonth() + 1) + "-" + (currentdate.getDate() - 1);
+                var a = datetime.split('-');
+                var fromdate = a[0] + '-' + '1' + '-' + '1';
+                var todate = a[0] + '-' + '12' + '-' + '31';
+
+
+                urllocation = window.location.href + "&fq=created_at:[" + fromdate + 'T00:00:00Z' + ' TO ' + todate + 'T00:00:00Z' + "]&start=0";
+                $scope.Userfilter(urllocation);
+
+                break;
+
+
+
+
+            case "6":
+
+                var datetime = currentdate.getFullYear() + "-" + (currentdate.getMonth() + 1) + "-" + (currentdate.getDate() - 1);
+                var a = datetime.split('-');
+                var fromdate = a[0] - 1 + '-' + '1' + '-' + '1';
+                var todate = a[0] - 1 + '-' + '12' + '-' + '31';
+
+                urllocation = window.location.href + "&fq=created_at:[" + fromdate + 'T00:00:00Z' + ' TO ' + todate + 'T00:00:00Z' + "]&start=0";
+                $scope.Userfilter(urllocation);
+
+                break;
+
+
+            case "":
+
+                urllocation = window.location.href + "&fq=created_at:&start=0";
+                $scope.Userfilter(urllocation);
+                break;
+        }
+    };
+    //Filter By page row
+    $scope.filterbyrow = function () {
+
+
+        switch ($scope.rows) {
+
+            case "20":
+                urllocation = window.location.href + "&rows=20&start=0";
+                $scope.Userfilter(urllocation);
+                break;
+            case "50":
+                urllocation = window.location.href + "&rows=50&start=0";
+                $scope.Userfilter(urllocation);
+                break;
+            case "100":
+                urllocation = window.location.href + "&rows=100&start=0";
+                $scope.Userfilter(urllocation);
+                break;
+            case "":
+                urllocation = window.location.href + "&rows=20&start=0";
+                $scope.Userfilter(urllocation);
+                break;
+        }
+
+    };
+
+    //Filter by A-Z
+    $scope.sortchar = function (val) {
+
+        switch (val) {
+            case "asc":
+                urllocation = window.location.href + "&sort=title asc&start=0";
+                $scope.Userfilter(urllocation);
+                break;
+            case "desc":
+                urllocation = window.location.href + "&sort=title desc&start=0";
+                $scope.Userfilter(urllocation);
+                break;
+            case "no":
+                urllocation = window.location.href + "&sort=&start=0";
+                $scope.Userfilter(urllocation);
+                break;
+        }
+    };
+    //Filter for asc desc by date
+    $scope.sortdate = function (val) {
+
+        switch (val) {
+            case "asc":
+                urllocation = window.location.href + "&sort=created_at asc";
+                $scope.Userfilter(urllocation);
+                break;
+            case "desc":
+                urllocation = window.location.href + "&sort=created_at desc";
+                $scope.Userfilter(urllocation);
+                break;
+            case "no":
+                urllocation = window.location.href + "&sort=";
+                $scope.Userfilter(urllocation);
+                break;
+        }
+    };
+
+    
 
     // initialize the controller
     $scope.init();
@@ -575,4 +794,75 @@ function DocumentSearchResultsController($scope, $rootScope, $attrs, $location, 
 
 // inject controller dependencies
 DocumentSearchResultsController.$inject = ['$scope', '$rootScope', '$attrs', '$location', '$route', '$routeParams', '$window', 'SolrSearchService', 'Utils'];
+
+//Filter by from and to date 
+function onChangeDate() {
+
+    var urllocation = '';
+    var fdate = $("#fromDate").val();
+    var tdate = $("#endDate").val();
+    var fdatesplit = fdate.split('-');
+    var tdatesplit = tdate.split('-');
+    var fromdate = fdatesplit[2] + '-' + fdatesplit[0] + '-' + fdatesplit[1];
+    var todate = tdatesplit[2] + '-' + tdatesplit[0] + '-' + tdatesplit[1];
+
+
+    var tilldate = '2013-01-01T00:00:00Z';
+    var currentdate = new Date();
+    var today = currentdate.getFullYear() + "-" + (currentdate.getMonth() + 1) + "-" + currentdate.getDate();
+
+
+
+    if (fdate != "" && tdate != "" && fdate != "yyyy-dd-mmT00:00:00Z" && tdate != "yyyy-dd-mmT00:00:00Z") {
+        if ((Date.parse(tdate) < Date.parse(fdate))) {
+
+            $("#endDate").val('');
+
+            document.getElementById("errorMsg").style.display = 'block';
+
+        }
+        else {
+            document.getElementById("errorMsg").style.display = 'none';
+            urllocation = window.location.href + "&fq=created_at:[" + fromdate + 'T00:00:00Z' + ' TO ' + todate + 'T23:59:59Z' + "]&start=0";
+            commondatefilter(urllocation);
+        }
+
+
+    }
+
+    if (fdate == "" && tdate == "") {
+
+        urllocation = window.location.href + "&fq=created_at:&start=0";
+        commondatefilter(urllocation);
+    }
+    if (fdate != "" && tdate == "") {
+
+        urllocation = window.location.href + "&fq=created_at:[" + fromdate + 'T00:00:00Z' + ' TO ' + today + 'T23:59:59Z' + "]&start=0";
+        commondatefilter(urllocation);
+
+    }
+    if (tdate != "" && fdate == "") {
+
+        var urllocation = window.location.href + "&fq=created_at:[" + tilldate + ' TO ' + todate + 'T23:59:59Z' + "]&start=0";
+        commondatefilter(urllocation);
+
+    }
+
+
+};
+// Common URL for every filter
+function commondatefilter(urllocation) {
+
+    var txt = screen.width + "*" + screen.height;
+    if (txt == "320*568" || txt == "375*667" || txt == "414*736" || txt == "375*812" || txt == "768*1024" || txt == "411*823" || txt == "411*731" || txt == "360*640") {
+        var elmnt = document.getElementById("searchresults");
+        elmnt.scrollIntoView();
+    }
+
+    var urllocation1 = urllocation.split('#');
+    parent.location.hash = urllocation1[1];
+
+}
+
+
 

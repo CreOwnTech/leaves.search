@@ -119,8 +119,8 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3">
 
+            <div class="col-lg-3">
                 <section id="content" class="mobileview">
                     <div class="container-fluid">
                         <div class="row-fluid">
@@ -293,10 +293,10 @@
                                 <div class="container-fluid">
                                     <div class="row-fluid">
                                         <form ng-controller="DocumentSearchResultsController" ng-submit="filterByword()" data-near-match="true" data-search-hints-field="" data-source="{{appleseedsSearchSolrProxy}}">
-                                           
+
                                             <input name="q" class="form-control searchbox" type="text" placeholder="Keyword or placename" ng-model="userquery" id="userquery" searchbox"/>
                                             <i class="fa fa-search searchbutton" ng-click="filterByword()" searchbutton aria-hidden="true"></i>
-                                        
+
                                         </form>
                                     </div>
                                 </div>
@@ -311,12 +311,12 @@
                         <div class="row-fluid row">
                             <div class="col-lg-3"></div>
                             <div class="col-lg-3">
-                                <div ng-controller="FieldFacetController" ng-hide="selected" data-field="Any_Words" data-exclusive="true" data-source="{{appleseedsSearchSolrProxy}}" ng-cloak>
+                                <div ng-controller="DocumentSearchResultsController" ng-hide="selected" data-field="content" data-exclusive="true" data-source="{{appleseedsSearchSolrProxy}}" ng-cloak>
                                     <input id="Any_Words" type="radio" name="Words" ng-click="filterByword()" checked /> Match Any Words
                                 </div>
                             </div>
                             <div class="col-lg-3">
-                                <div ng-controller="FieldFacetController" ng-hide="selected" data-field="All_Words" data-exclusive="true" data-source="{{appleseedsSearchSolrProxy}}" ng-cloak>
+                                <div ng-controller="DocumentSearchResultsController" ng-hide="selected" data-field="title" data-exclusive="true" data-source="{{appleseedsSearchSolrProxy}}" ng-cloak>
                                     <input id="All_Words" type="radio" name="Words" ng-click="filterByword()" /> Match All Words
                                 </div>
                             </div>
@@ -330,7 +330,7 @@
                             <div class="row">
                                 <div class="col-lg-2 ipad-controler">
                                     <div class="facets unstyled">
-                                        <div ng-controller="FieldFacetController" ng-hide="selected" data-exclusive="true" data-field="user_name" data-source="{{appleseedsSearchSolrProxy}}" ng-cloak id="ddl_user">
+                                        <div ng-controller="DocumentSearchResultsController" ng-hide="selected" data-exclusive="true" data-field="user_name" data-source="{{appleseedsSearchSolrProxy}}" ng-cloak id="ddl_user">
                                             <select class="form-control" ng-model="user_name" ng-change="filterByUser()" id="user_name">
                                                 <option value="">All User</option>
                                                 <option value="0">admin</option>
@@ -341,7 +341,7 @@
                                 </div>
 
                                 <div class="col-lg-2 ipad-controler">
-                                    <div ng-controller="FieldFacetController" ng-hide="selected" data-exclusive="true" data-field="createdDate" data-source="{{appleseedsSearchSolrProxy}}" ng-cloak>
+                                    <div ng-controller="DocumentSearchResultsController" ng-hide="selected" data-exclusive="true" data-field="*" data-source="{{appleseedsSearchSolrProxy}}" ng-cloak>
                                         <select class="form-control" ng-change="filterByDay()" ng-model="days" id="created_at">
                                             <option value=""> All Time </option>
                                             <option value="0">Today</option>
@@ -356,18 +356,18 @@
                                 </div>
 
                                 <div class="col-lg-3 ipad-controler">
-                                    <div ng-controller="FieldFacetController" ng-hide="selected" data-exclusive="true" data-field="startDate" data-source="{{appleseedsSearchSolrProxy}}" ng-cloak>
+                                    <div ng-controller="DocumentSearchResultsController" ng-hide="selected" data-exclusive="true" data-field="*" data-source="{{appleseedsSearchSolrProxy}}" ng-cloak>
                                         <input id="fromDate" name="startDate" class="form-control" type="text" size="4" onchange="onChangeDate()" placeholder="From : mm-dd-yyyy" readonly />
                                     </div>
                                 </div>
                                 <div class="col-lg-3 ipad-controler">
-                                    <div ng-controller="FieldFacetController" ng-hide="selected" data-exclusive="true" data-field="endDate" data-source="{{appleseedsSearchSolrProxy}}" ng-cloak>
+                                    <div ng-controller="DocumentSearchResultsController" ng-hide="selected" data-exclusive="true" data-field="*" data-source="{{appleseedsSearchSolrProxy}}" ng-cloak>
                                         <input id="endDate" name="endDate" class="form-control" type="text" size="4" onchange="onChangeDate()" placeholder="To : mm-dd-yyyy" readonly />
                                         <label id="errorMsg" class="errorMsg">Todate should be less than From date</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-2 ipad-controler">
-                                    <div ng-controller="FieldFacetController" ng-hide="selected" data-exclusive="true" data-field="rows" data-source="{{appleseedsSearchSolrProxy}}" ng-cloak>
+                                    <div ng-controller="DocumentSearchResultsController" ng-hide="selected" data-exclusive="true" data-field="user_id" data-source="{{appleseedsSearchSolrProxy}}" ng-cloak>
                                         <select class="form-control" ng-change="filterbyrow()" ng-model="rows" id="perpage">
                                             <option value="" selected="selected">Items Per Page</option>
                                             <option value="20">20</option>
@@ -438,13 +438,7 @@
                                 </div>
 
                                 <div class="col-lg-3">
-                                    <div id="search-results"
-                                         class=""
-                                         ng-controller="FieldFacetController"
-                                         data-fields="*"
-                                         data-source="{{appleseedsSearchSolrProxy}}"
-                                         documents-per-page="25"
-                                         ng-cloak>
+                                    <div id="search-results_Date" ng-controller="DocumentSearchResultsController" ng-hide="selected" data-exclusive="true" data-field="*" data-source="{{appleseedsSearchSolrProxy}}" documents-per-page="25" ng-cloak>
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                             <label class="btn btn-secondary">
                                                 <a ng-click="sortdate('asc')" autocomplete="off">Date&nbsp; <i class="fa fa-angle-double-up"></i></a>
@@ -456,13 +450,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
-                                    <div id="search-results"
-                                         class=""
-                                         ng-controller="FieldFacetController"
-                                         data-fields="*"
-                                         data-source="{{appleseedsSearchSolrProxy}}"
-                                         documents-per-page="25"
-                                         ng-cloak>
+                                    <div id="search-results_glossary" ng-controller="DocumentSearchResultsController" data-field="content_text" data-source="{{appleseedsSearchSolrProxy}}" documents-per-page="25" ng-cloak>
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                             <label class="btn btn-secondary" id="AZ">
                                                 <a ng-click="sortchar('asc')">(A-Z)</a>
